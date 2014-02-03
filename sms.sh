@@ -11,13 +11,13 @@ elif [[ $operatingSystem = 'Darwin' ]]
     then
         StarboundModFolder=~/Library/Application\ Support/Steam/SteamApps/common/Starbound/mods #if operating system is Darwin (mac) then use this path
 else
-    StarboundModFolder=~/.local/share/Steam/SteamApps/common/Starbound/mods/ #if anything else, default to this \|/ path.
+    StarboundModFolder=~/.local/share/Steam/SteamApps/common/Starbound/mods/ #if anything else, default to this path.
     echo "Operating system not found. Defaulting path to mods folder to \"$StarboundModFolder\""
-    echo "Edit line 15 if it's somwhere else"
+    echo "Edit line 15 if it's somewhere else"
         fi
 if ! [  -d "$StarboundModFolder" ]						#Check for Mod Folder
 	then
-		echo "Folder not found! Please change line StarboundModFolder=$StarboundModFolder in this script to /your/location/Starbound/mods/ "
+		echo "Folder not found! Please change line StarboundModFolder=$StarboundModFolder under your operating system in this script to /your/location/Starbound/mods/ "
 		exit 1
 	fi
 
