@@ -3,24 +3,29 @@
 #example ./SBMI.sh Mod1.zip Mod2.rar Mod3.zip
 #
 #depends on unzip and unrar
-								
-StarboundModFolder=~/.local/share/Steam/SteamApps/common/Starbound/mods/	#!!! The location of /Starbound/mods/, change if you
-										#changed your steam games folder or are running 
-										#a not Linux os
-
-
-
+operatingSystem=$(uname) #check operating system
+if [[ $operatingSystem = 'Linux' ]]
+        then
+    StarboundModFolder=~/.local/share/Steam/SteamApps/common/Starbound/mods/ #if operating system is linux, use this path
+elif [[ $operatingSystem = 'Darwin' ]]
+    then
+        StarboundModFolder=~/Library/Application\ Support/Steam/SteamApps/common/Starbound/mods #if operating system is Darwin (mac) then use this path
+else
+    StarboundModFolder=~/.local/share/Steam/SteamApps/common/Starbound/mods/ #if anything else, default to this path.
+    echo "Operating system not found. Defaulting path to mods folder to \"$StarboundModFolder\""
+    echo "Edit line 15 if it's somewhere else"
+        fi
 if ! [  -d "$StarboundModFolder" ]						#Check for Mod Folder
 	then
-		echo "Folder not found! Please change line StarboundModFolder=$StarboundModFolder in this script to /your/location/Starbound/mods/ "
+		echo "Folder not found! Please change line StarboundModFolder=$StarboundModFolder under your operating system in this script to /your/location/Starbound/mods/ "
 		exit 1
 	fi
 
 Files=( "$@" )
 echo ""
-for arg in "${Files[@]}" 
+for arg in "${Files[@]}"
 	do
-		
+
 		if [ -f "$arg" ]
 			then
 			filename=$(basename "$arg")					#get Filenameextension, for desicion between zip/rar
@@ -51,7 +56,7 @@ for arg in "${Files[@]}"
 				fi
 			else								#if branch for other file types, report if you'd like to have support for a special type
 				echo "Filetype not supported: $arg
-"										
+"
 			fi
 
 		else
@@ -60,7 +65,6 @@ for arg in "${Files[@]}"
 done
 echo "Completed!
 ---------------
-
-Current mods:"											
-ls -1A --color=always "${StarboundModFolder}"							#list current mods (files and folders in Starbound/mods)
+Current mods:"
+ls "${StarboundModFolder}"							#list current mods (files and folders in Starbound/mods)
 echo ""
