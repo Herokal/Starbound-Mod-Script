@@ -1,6 +1,6 @@
 #!/bin/bash
 #This Script extracts a Mod to its prefered Target
-#example ./SBMI.sh Mod1.zip Mod2.rar Mod3.zip
+#example ./sms.sh Mod1.zip Mod2.rar Mod3.zip
 #
 #depends on unzip and unrar
 operatingSystem=$(uname) #check operating system
@@ -66,5 +66,5 @@ done
 echo "Completed!
 ---------------
 Current mods:"
-ls "${StarboundModFolder}"							#list current mods (files and folders in Starbound/mods)
+ls -1 "${StarboundModFolder}"							#list current mods (files and folders in Starbound/mods)
 echo ""
