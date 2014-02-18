@@ -17,3 +17,6 @@ install:check-bin
 		install -m=0755 $(script) $(bin)/$(script)
 uninstall:check-bin
 		rm $(bin)/$(script)
+update:
+	bashvar=$(which bash)
+	exec $bashvar ./update.sh
