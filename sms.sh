@@ -22,11 +22,15 @@ if ! [  -d "$StarboundModFolder" ]						#Check for Mod Folder
 	fi
 
 Files=( "$@" )
+cd=false
+
 echo ""
 for arg in "${Files[@]}"
 	do
-
-		if [ -f "$arg" ]
+		if [ "$arg" == 'cd' ]
+		then
+			cd=true
+		elif [ -f "$arg" ]
 			then
 			filename=$(basename "$arg")					#get Filenameextension, for desicion between zip/rar
 			extension="${filename##*.}"
@@ -68,3 +72,9 @@ echo "Completed!
 Current mods:"
 ls -1 "${StarboundModFolder}"							#list current mods (files and folders in Starbound/mods)
 echo ""
+if [  $cd == true ]
+then
+	echo "cding to $StarboundModFolder"
+	cd $StarboundModFolder
+	exec bash
+fi
