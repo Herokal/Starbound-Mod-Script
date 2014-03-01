@@ -23,6 +23,7 @@ if ! [  -d "$StarboundModFolder" ]						#Check for Mod Folder
 
 Files=( "$@" )
 cd=false
+del=false
 
 echo ""
 for arg in "${Files[@]}"
@@ -30,6 +31,15 @@ for arg in "${Files[@]}"
 		if [ "$arg" == 'cd' ]
 		then
 			cd=true
+		elif [ "$arg" == '-d' ]
+		then 
+			del=true
+		elif [ "$arg" == '-a' ]
+		then
+			del=false
+		elif [ "$del" == true ]
+		then
+			rm -rf "${StarboundModFolder}/$arg"
 		elif [ -f "$arg" ]
 			then
 			filename=$(basename "$arg")					#get Filenameextension, for desicion between zip/rar
@@ -64,7 +74,7 @@ for arg in "${Files[@]}"
 			fi
 
 		else
-			echo "File not Found! $arg"							#branch if the file doesn't exist
+			echo "Argument unknown or File not found $arg"							#branch if the file doesn't exist
 		fi
 done
 echo "Completed!
